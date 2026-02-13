@@ -1,48 +1,28 @@
-# PROJECT PORTFOLIO: Linux Minishell
-# Date: February 01, 2025
-# Context: Emertxe Project / Embedded Systems Portfolio
+# Linux Minishell (msh)
 
+**Project:** Linux Minishell (System Programming)
+**Tech Stack:** C, POSIX API, Signals, IPC.
 
-================================================================================
- GITHUB README
-================================================================================
+Architected a custom shell to interact directly with the Linux Kernel, demonstrating mastery of process lifecycle management and memory handling.
 
-# Linux Minishell
-
-A custom command-line interpreter developed in **C** that mimics the core functionality of standard shells like Bash or Zsh. This project demonstrates a deep understanding of **Linux System Programming**, **Process Management**, and **Signal Handling**.
-
-## 🚀 Features
-
-* **Command Execution:** Supports execution of external system commands (e.g., `ls`, `ps`, `date`, `vim`).
-* **Built-in Commands:** Implements shell-specific commands internally (e.g., `cd`, `exit`, `jobs`).
-* **Input/Output Redirection:**
-    * Output Redirection (`>`)
-    * Input Redirection (`<`)
-    * Append Mode (`>>`)
-* **Piping:** Supports chaining multiple commands using pipes (`|`) to pass output from one process as input to another.
-* **Job Control:**
-    * Foreground and Background process management (`&`).
-    * Signal Handling: Custom handlers for `SIGINT` (Ctrl+C) and `SIGTSTP` (Ctrl+Z).
+* Utilized `fork()` for child process creation and `execvp()` for command execution, while implementing `waitpid()` to strictly prevent zombie processes.
+* Manipulated file descriptors using `pipe()` and `dup2()` to enable inter-process communication, allowing the chaining of multiple commands (e.g., `ls | grep`).
+* Integrated custom signal handlers (`SIGINT`, `SIGTSTP`) to manage job control, allowing users to interrupt processes (Ctrl+C) and manage background jobs.
 
 ## 🛠️ Technical Stack & Concepts
 
 * **Language:** C
 * **OS:** Linux (Ubuntu/Fedora)
 * **System Calls:**
-    * **Process Creation:** `fork()`, `vfork()`
+    * **Process Creation:** `fork()`
     * **Execution:** `execvp()` family
     * **Process Waiting:** `wait()`, `waitpid()`
-    * **File Descriptors:** `open()`, `close()`, `dup2()`
-    * **Signals:** `signal()`, `sigaction()`
+    * **File Descriptors:** `pipe()`, `close()`, `dup2()`
+    * **Signals:** `signal()`
 
 ## 📂 Project Structure
 
 ```text
-├── main.c           # Entry point and main loop
-├── builtins.c       # Implementation of cd, exit, jobs
-├── executor.c       # Logic for fork() and exec()
-├── parser.c         # String tokenization and command parsing
-├── signals.c        # Signal handler definitions
-├── minishell.h      # Header file with function prototypes
-├── Makefile         # Build script
+├── msh.c            # Complete source code (Main loop, Parser, Executor)
+├── msh              # Compiled executable
 └── README.md        # Documentation
